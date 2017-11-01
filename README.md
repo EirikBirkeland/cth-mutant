@@ -31,9 +31,9 @@ myObserver2.observe({
 
 API 3 - chained
 ```js
-const myObserver2 = Object.create(Mutant)
+const myObserver3 = Object.create(Mutant)
 
-myObserver2
+myObserver3
 .observe({
     target: document,
     config: {childList: true}
