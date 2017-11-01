@@ -4,7 +4,7 @@ Usage goes something like:
 
 ```js
 // Duplicate the object, OLOO style
-const myObserver = Object.create(CthChangeObserver)
+const myObserver = Object.create(Mutant)
 
 myObserver.observe(document, {childNodes: true}, function(muts){
   muts.forEach(mut => {
@@ -22,7 +22,7 @@ myObserver.reconnect()
 // -------------------------------------
 
 // Duplicate the object, OLOO style
-const myObserver2 = Object.create(CthChangeObserver)
+const myObserver2 = Object.create(Mutant)
 
 myObserver2.observe(document, {childNodes: true}, function(muts){
   muts.forEach(mut => {
@@ -34,9 +34,5 @@ myObserver2.observe(document, {childNodes: true}, function(muts){
     myObserver2.reconnect()
   })
 })
-
-
-
-```
 
 (;,;)
