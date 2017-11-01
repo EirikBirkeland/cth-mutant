@@ -35,4 +35,25 @@ myObserver2.observe(document, {childNodes: true}, function(muts){
   })
 })
 
+// -----------------------------------------
+
+const myObserver3 = Object.create(Mutant)
+
+myObserver3.observe({
+    target: document,
+    config: {childNodes: true},
+    callback: function (muts) {
+        muts.forEach(mut => {
+            // pause observing
+            myObserver2.disconnect()
+
+            // do any intermittent synchronous DOM work here
+            document.body.appendChild(document.createElement('span'))
+
+            // Then, reconnect to the instance
+            myObserver2.reconnect()
+        })
+    }
+})
+
 (;,;)
