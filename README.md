@@ -7,7 +7,7 @@ API 1 - like standard, but just provide the callback as 3rd parameter.
 // Duplicate the object, OLOO style
 const myObserver = Object.create(Mutant)
 
-myObserver.observe(document, {childNodes: true}, function(muts){
+myObserver.observe(document, {childList: true}, function(muts){
   muts.forEach(mut => {
     console.log(mut)
   })
@@ -20,7 +20,7 @@ const myObserver2 = Object.create(Mutant)
 
 myObserver2.observe({
     target: document,
-    config: {childNodes: true},
+    config: {childList: true},
     callback: function (muts) {
         muts.forEach(mut => {
           console.log(mut)
@@ -30,14 +30,13 @@ myObserver2.observe({
 ```
 
 API 3 - chained
-
 ```js
 const myObserver2 = Object.create(Mutant)
 
 myObserver2
 .observe({
     target: document,
-    config: {childNodes: true}
+    config: {childList: true}
 })
 .tap(function(muts){
     console.log(muts)
