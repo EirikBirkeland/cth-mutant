@@ -1,3 +1,5 @@
+TODO: Rewrite/finish
+
 Usage goes something like:
 
 ```js
