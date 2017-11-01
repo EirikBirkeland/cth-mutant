@@ -21,17 +21,29 @@ const Mutant = {
     _target: null,
     _config: null,
 
-    observe: function (target = this._target, config = this._config, cb) {
-        this._target = target
-        this._config = config
+    observe: function (...args) {
 
-        this._callback = cb || this._callback
-
-        if (!this._mutationObserver) {
-            this._mutationObserver = new MutationObserver(this._callback)
+        if (args[0] && args[1] && args[2]) {
+            console.log(args)
+            this._target = args[0]
+            this._config = args[1]
+            this._callback = args[2]
+        } else if (args[0] && args[1]) {
+            this._target = args[0]
+            this._config = args[1]
+        } else if (args[0]) {
+            this._target = args[0].target
+            this._config = args[0].config
+            this._callback = args[0].callback
         }
 
-        this._mutationObserver.observe(target, config)
+        if (!this._callback) {
+            return this
+        }
+
+        this._mutationObserver = new MutationObserver(this._callback)
+        this._mutationObserver.observe(this._target, this._config)
+
     },
 
     disconnect: function () {
@@ -42,6 +54,12 @@ const Mutant = {
      * Convenience method.
      */
     reconnect: function () {
-        this.observe()
+        this._mutationObserver.observe()
+    },
+
+    tap: function (cb) {
+        this._callback = cb
+        this._mutationObserver = new MutationObserver(this._callback)
+        this._mutationObserver.observe(this._target, this._config)
     }
 }
