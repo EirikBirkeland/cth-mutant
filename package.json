@@ -1,6 +1,6 @@
 {
   "name": "cth-mutant",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A convenience wrapper for MutationObserver",
   "main": "index.js",
   "scripts": {
