@@ -39,7 +39,9 @@ myObserver3
     config: {childList: true}
 })
 .tap(function(muts){
-    console.log(muts)
+    muts.forEach(mut => {
+      console.log(mut)
+    })
 })
 ```
 
