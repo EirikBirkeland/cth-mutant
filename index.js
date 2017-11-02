@@ -16,11 +16,6 @@
  */
 
 const Mutant = {
-    _mutationObserver: null,
-    _callback: null,
-    _target: null,
-    _config: null,
-
     observe: function (...args) {
 
         if (args[0] && args[1] && args[2]) {
@@ -63,3 +58,5 @@ const Mutant = {
         this._mutationObserver.observe(this._target, this._config)
     }
 }
+
+module.exports = Mutant
