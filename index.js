@@ -30,6 +30,8 @@ const Mutant = {
             this._target = args[0].target
             this._config = args[0].config
             this._callback = args[0].callback
+        } else {
+            // no arguments assumes it's a reconnect
         }
 
         if (!this._callback) {
@@ -49,7 +51,7 @@ const Mutant = {
      * Convenience method.
      */
     reconnect: function () {
-        this._mutationObserver.observe()
+        this.observe()
     },
 
     tap: function (cb) {
