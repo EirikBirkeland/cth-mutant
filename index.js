@@ -4,19 +4,19 @@
  * .disconnect() and .reconnect() are sometimes a handy pair to use when we want to listen for a change in the DOM, suspend the listening, make our changes, and resume the listening.
  */
 
-/**
- *
- * const myObserver = Object.create(CthChangeObserver)
- * myObserver.observe(document, {childNodes: true}, console.log)
- * myObserver.disconnect()
- * // do your work here
- *
- * // Then, reconnect to the instance
- * myObserver.reconnect()
- */
-
 const Mutant = {
+    /**
+     * .observe() differs from the standard MutationObserver object in two respects:
+     * (1) it takes the callback directly along with target and config
+     * (2) it can be run without arguments to resume observing with previously provided parameters
+     *
+     * @param {args} args
+     * @returns {Mutant}
+     */
     observe: function (...args) {
+        if(typeof MutationObserver === "undefined") {
+            throw new ReferenceError("Your environment is missing the MutationObserver.")
+        }
 
         if (args[0] && args[1] && args[2]) {
             console.log(args)
@@ -48,12 +48,16 @@ const Mutant = {
     },
 
     /**
-     * Convenience method.
+     * Convenience method - an alias added for practical semantic reasons.
      */
     reconnect: function () {
         this.observe()
     },
 
+    /**
+     * .tap can be used for optionally adding a observer callback after initialization using jQuery-style cascade notation (returning this). Any existing callback stored on the object will be replaced.
+     * @param cb
+     */
     tap: function (cb) {
         this._callback = cb
         this._mutationObserver = new MutationObserver(this._callback)
