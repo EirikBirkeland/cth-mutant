@@ -12,13 +12,18 @@ const Mutant = {
      * @param {args} args - multiple input styles possible. See readme for example
      * @returns {Mutant}
      */
+
+    /**
+     *
+     * @param args
+     * @returns {Mutant}
+     */
     observe: function (...args) {
         if (typeof MutationObserver === "undefined") {
             throw new ReferenceError("Your environment is missing the MutationObserver.")
         }
 
         if (args[0] && args[1] && args[2]) {
-            console.log(args)
             this._target = args[0]
             this._config = args[1]
             this._callback = args[2]

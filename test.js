@@ -54,6 +54,7 @@ test('Reconnect observer and expect event NOT to trigger', t => {
     }
 })
 
+// TODO:
 /*
 const myObserver2 = Object.create(Mutant)
 
