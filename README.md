@@ -1,3 +1,5 @@
+🐢
+
 TODO: Rewrite/finish
 
 This object encapsulates MutationObserver and adds a pleasant .reconnect() method. If you use MutationObservers quite often and want a simpler syntax, try this.
