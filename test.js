@@ -1,14 +1,60 @@
-// TODO: Get a MutationObserver node polyfill .. use with Cheerio for testing?
+const {MutationObserver, documentMock} = require('./lib/MutationObserver-mock')
+global.MutationObserver = MutationObserver
+const Mutant = require('./index')
+const forEach = require('lodash.foreach')
+const test = require('ava')
 
-// Duplicate the object, OLOO style
 const myObserver = Object.create(Mutant)
+const mutCallbackEvents = []
 
-myObserver.observe(document, {childList: true}, function (muts) {
-    muts.forEach(mut => {
-        console.log(mut)
+myObserver.observe(documentMock, {childList: true, subtree: true}, function (muts) {
+    forEach(muts, mut => {
+        mutCallbackEvents.push(mut)
     })
 })
 
+test('Change object and expect event to trigger', t => {
+    const lenBefore = mutCallbackEvents.length
+
+    documentMock.body = "<span></span>"
+
+    const lenAfter = mutCallbackEvents.length
+
+    if (lenAfter > lenBefore) {
+        t.pass()
+    }
+
+})
+
+test('Disconnect observer and expect event NOT to trigger', t => {
+
+    myObserver.disconnect()
+    const lenBefore = mutCallbackEvents.length
+
+    documentMock.body = "<span>Doing some stuff without triggering events.</span>"
+
+    const lenAfter = mutCallbackEvents.length
+
+    if (lenAfter === lenBefore) {
+        t.pass()
+    }
+})
+
+test('Reconnect observer and expect event NOT to trigger', t => {
+
+    myObserver.reconnect()
+    const lenBefore = mutCallbackEvents.length
+
+    documentMock.body = "<span>This one should trigger.</span>"
+
+    const lenAfter = mutCallbackEvents.length
+
+    if (lenAfter > lenBefore) {
+        t.pass()
+    }
+})
+
+/*
 const myObserver2 = Object.create(Mutant)
 
 myObserver2.observe({
@@ -38,3 +84,4 @@ myObserver3
     .tap(function (muts) {
         console.log(muts)
     })
+    */

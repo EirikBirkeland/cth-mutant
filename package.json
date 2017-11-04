@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/EirikBirkeland/cth-mutant/issues"
   },
-  "homepage": "https://github.com/EirikBirkeland/cth-mutant#readme"
+  "homepage": "https://github.com/EirikBirkeland/cth-mutant#readme",
+  "devDependencies": {
+    "ava": "^0.23.0",
+    "lodash.foreach": "^4.5.0"
+  }
 }

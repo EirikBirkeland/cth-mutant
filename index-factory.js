@@ -32,21 +32,21 @@ const createMutant = function (...args) {
     if (args[0] && args[1] && args[2]) {
         console.log(args)
         _target = args[0]
-        _target = args[1]
+        _config = args[1]
         _callback = args[2]
     } else if (args[0] && args[1]) {
         _target = args[0]
-        _target = args[1]
+        _config = args[1]
     } else if (args[0]) {
         _target = args[0].target
-        _target = args[0].config
+        _config = args[0].config
         _callback = args[0].callback
     } else {
         // no arguments assumes it's a reconnect
     }
 
     _mutationObserver = new MutationObserver(_callback)
-    _mutationObserver.observe(_target, _target)
+    _mutationObserver.observe(_target, _config)
 
     return {
         /**
@@ -70,7 +70,7 @@ const createMutant = function (...args) {
         tap: function (cb) {
             _callback = cb
             _mutationObserver = new MutationObserver(_callback)
-            _mutationObserver.observe(_target, _target)
+            _mutationObserver.observe(_target, _config)
         }
     }
 }
