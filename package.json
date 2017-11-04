@@ -4,7 +4,8 @@
   "description": "A convenience wrapper for MutationObserver",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "doc": "documentation build index.js -f html -o docs && jsdoc index.js"
   },
   "repository": {
     "type": "git",

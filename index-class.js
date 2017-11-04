@@ -1,18 +1,22 @@
-/** @module cth-mutant */
+/**
+ * This object encapsulates MutationObserver and adds a pleasant .reconnect() method. If you use MutationObservers quite often and want a simpler syntax, try this.
+ *
+ * .disconnect() and .reconnect() are sometimes a handy pair to use when we want to listen for a change in the DOM, suspend the listening, make our changes, and resume the listening.
+ */
 
 /**
- * @namespace
+ * @
  */
-const Mutant = {
+class Mutant {
     /**
      * .observe() differs from the standard MutationObserver object in two respects:
      * (1) it takes the callback directly along with target and config
      * (2) it can be run without arguments to resume observing with previously provided parameters
-     *
-     * @param {args} args - multiple input styles possible. See readme for example
+     * @constructor
+     * @param {args} args
      * @returns {Mutant}
      */
-    observe: function (...args) {
+    constructor(...args) {
         if (typeof MutationObserver === "undefined") {
             throw new ReferenceError("Your environment is missing the MutationObserver.")
         }
@@ -39,28 +43,27 @@ const Mutant = {
 
         this._mutationObserver = new MutationObserver(this._callback)
         this._mutationObserver.observe(this._target, this._config)
-
-    },
+    }
 
     /**
      *
      */
-    disconnect: function () {
+    disconnect() {
         this._mutationObserver.disconnect()
-    },
+    }
 
     /**
      * Convenience method - an alias added for practical semantic reasons.
      */
-    reconnect: function () {
+    reconnect() {
         this.observe()
-    },
+    }
 
     /**
      * .tap can be used for optionally adding a observer callback after initialization using jQuery-style cascade notation (returning this). Any existing callback stored on the object will be replaced.
-     * @param {function} cb - a callback function; will receive mutations
+     * @param cb
      */
-    tap: function (cb) {
+    tap(cb) {
         this._callback = cb
         this._mutationObserver = new MutationObserver(this._callback)
         this._mutationObserver.observe(this._target, this._config)
