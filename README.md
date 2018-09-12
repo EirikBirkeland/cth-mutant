@@ -1,13 +1,7 @@
-🐢
+This object encapsulates MutationObserver and adds a pleasant .reconnect() method. Try this f you use MutationObservers often and want a simpler syntax.
+.disconnect() and .reconnect() are handy to use when we want to listen for a change in the DOM, suspend the listening, make our changes, and resume the listening.
 
-TODO: Rewrite/finish
-
-This object encapsulates MutationObserver and adds a pleasant .reconnect() method. If you use MutationObservers quite often and want a simpler syntax, try this.
-
-.disconnect() and .reconnect() are sometimes a handy pair to use when we want to listen for a change in the DOM, suspend the listening, make our changes, and resume the listening.
-
- 
-Usage goes something like:
+### Usage
 
 API 1 - like standard, but just provide the callback as 3rd parameter.
 ```js
